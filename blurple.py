@@ -477,10 +477,10 @@ async def blurple(ctx, arg1 = None):
         embed.set_thumbnail(url=picture)
         await bot.send_message(ctx.message.channel, embed=embed)
 
-        if blurplenesspercentage > 75 and picture == ctx.author.avatar_url and percentblurple > 5:
+        if blurplenesspercentage > 75 and picture == ctx.message.author.avatar_url and percentblurple > 5:
             await bot.send_message(ctx.message.channel, "<@%s>, your profile pic has enough blurple (over 75% in total and over 5% blurple)!" % ctx.message.author.id)
             await ctx.author.add_roles(blurpleuserrole)
-        elif picture == ctx.author.avatar_url and blurpleuserrole not in ctx.author.roles:
+        elif picture == ctx.message.author.avatar_url and blurpleuserrole not in ctx.message.author.roles:
             await bot.send_message(ctx.message.channel, "<@%s>, your profile pic does not have enough blurple (over 75% in total and over 5% blurple). However, this colour detecting algorithm is automated, so if you believe your pfp is blurple enough, then we apologize for the faulty algorithm. (Not sure how to make a blurple logo? Type >blurplefy!)" % ctx.message.author.id)
 
 @bot.command(pass_context=True)
