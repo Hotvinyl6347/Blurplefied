@@ -61,7 +61,7 @@ async def help(ctx):
     embed=discord.Embed(title="", timestamp=datetime.datetime.utcnow(), colour=0x7289da)
     embed.set_author(name="Commands list")
     embed.add_field(name="Countdown", value="Time until Discord's Anniversary. \n**Usage:**\n`>countdown`")
-    embed.add_field(name="Blurple", value="Check how much blurple is in an image. If used without a picture, it analyses your own profile picture, and if it has enough blurple, you will receive a role. \n**Usage:**\n`{BOT_PREFIX}blurple <@username/user ID/picture url/None/uploaded image>`")
+    embed.add_field(name="Blurple", value="Check how much blurple is in an image. If used without a picture, it analyses your own profile picture, and if it has enough blurple, you will receive a role. \n**Usage:**\n`>blurple <@username/user ID/picture url/None/uploaded image>`")
     embed.add_field(name="Blurplefy", value="Blurplefy your image/gif! \n**Usage:**\n`>blurplefy <@username/user ID/picture url/None/uploaded image>`")
     embed.set_footer(text="Help message requested by %s#%s" % (ctx.message.author.name, ctx.message.author.discriminator))
     embed.set_thumbnail(url=bot.user.avatar_url)
