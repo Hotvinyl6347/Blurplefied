@@ -97,7 +97,7 @@ async def countdown(ctx):
 async def blurplefygif(ctx, arg1 = None):
     picture = None
 
-    await bot.send_message(ctx.message.channel, "<@%s>, starting blurple image analysis (Please note that this may take a while)")
+    await bot.send_message(ctx.message.channel, "<@%s>, starting blurple image analysis (Please note that this may take a while)" % ctx.message.author.id)
 
 
     start = time.time()
@@ -130,7 +130,7 @@ async def blurplefygif(ctx, arg1 = None):
             async with cs.get(picture) as r:
                 response = await r.read()
     except ValueError:
-        await bot.send_message(ctx.message.channel, "<@%s>, please link a valid image URL")
+        await bot.send_message(ctx.message.channel, "<@%s>, please link a valid image URL" % ctx.message.author.id)
         return
 
     colourbuffer = 20
@@ -138,7 +138,7 @@ async def blurplefygif(ctx, arg1 = None):
     try:
         im = Image.open(BytesIO(response))
     except Exception:
-        await bot.send_message(ctx.message.channel, "<@%s>, please link a valid image URL")
+        await bot.send_message(ctx.message.channel, "<@%s>, please link a valid image URL" % ctx.message.author.id)
         return
 
     if im.format != 'GIF':
@@ -150,7 +150,7 @@ async def blurplefygif(ctx, arg1 = None):
     maxpixelcount = 1562500
 
     end = time.time()
-    await bot.send_message(ctx.message.channel, "<@%s>, image fetched, analysing image (This process can sometimes take a while depending on the size of the image)")
+    await bot.send_message(ctx.message.channel, "<@%s>, image fetched, analysing image (This process can sometimes take a while depending on the size of the image)" % ctx.message.author.id)
     start = time.time()
     if impixels > maxpixelcount:
         downsizefraction = math.sqrt(maxpixelcount/impixels)
@@ -158,7 +158,7 @@ async def blurplefygif(ctx, arg1 = None):
         imsize = list(im.size)
         impixels = imsize[0]*imsize[1]
         end = time.time()
-        await bot.send_message(ctx.message.channel, "<@%s>, image resized smaller for easier processing")
+        await bot.send_message(ctx.message.channel, "<@%s>, image resized smaller for easier processing" % ctx.message.author.id)
         start = time.time()
 
     def imager(im):
@@ -342,7 +342,7 @@ async def blurplefy(ctx, arg1 = None):
 async def blurple(ctx, arg1 = None):
     picture = None
 
-    await bot.send_message(ctx.message.channel, "<@%s>, starting blurple image analysis (Please note that this may take a while)")
+    await bot.send_message(ctx.message.channel, "<@%s>, starting blurple image analysis (Please note that this may take a while)" % ctx.message.author.id)
 
 
     start = time.time()
@@ -375,7 +375,7 @@ async def blurple(ctx, arg1 = None):
             async with cs.get(picture) as r:
                 response = await r.read()
     except ValueError:
-        await bot.send_message(ctx.message.channel, "<@%s>, please link a valid image URL")
+        await bot.send_message(ctx.message.channel, "<@%s>, please link a valid image URL" % ctx.message.author.id)
         return
 
     colourbuffer = 20
@@ -383,7 +383,7 @@ async def blurple(ctx, arg1 = None):
     try:
         im = Image.open(BytesIO(response))
     except Exception:
-        await bot.send_message(ctx.message.channel, "<@%s>, please link a valid image URL")
+        await bot.send_message(ctx.message.channel, "<@%s>, please link a valid image URL" % ctx.message.author.id)
         return
 
     im = im.convert('RGBA')
@@ -401,7 +401,7 @@ async def blurple(ctx, arg1 = None):
         imsize = list(im.size)
         impixels = imsize[0]*imsize[1]
         end = time.time()
-        await bot.send_message(ctx.message.channel, "<@%s>, image resized smaller for easier processing")
+        await bot.send_message(ctx.message.channel, "<@%s>, image resized smaller for easier processing" % ctx.message.author.id)
         start = time.time()
 
     def imager(im):
@@ -461,7 +461,7 @@ async def blurple(ctx, arg1 = None):
         image = await bot.loop.run_in_executor(None, imager, im)
         end = time.time()
         #await ctx.send(f"{ctx.author.display_name}, image data extracted ({end - start:.2f}s)")
-        image = await bot.send_message(ctx.message.channel, fp=image, filename='image.png')
+        image = await bot.send_file(ctx.message.channel, fp=image, filename='image.png')
 
         blurplenesspercentage = round(((nooftotalpixels/noofpixels)*100), 2)
         percentblurple = round(((noofblurplepixels/noofpixels)*100), 2)
@@ -478,10 +478,10 @@ async def blurple(ctx, arg1 = None):
         await bot.send_message(ctx.message.channel, embed=embed, file=image)
 
         if blurplenesspercentage > 75 and picture == ctx.author.avatar_url and percentblurple > 5:
-            await bot.send_message(ctx.message.channel, "<@%s>, your profile pic has enough blurple (over 75% in total and over 5% blurple)!")
+            await bot.send_message(ctx.message.channel, "<@%s>, your profile pic has enough blurple (over 75% in total and over 5% blurple)!" % ctx.message.author.id)
             await ctx.author.add_roles(blurpleuserrole)
         elif picture == ctx.author.avatar_url and blurpleuserrole not in ctx.author.roles:
-            await bot.send_message(ctx.message.channel, "<@%s>, your profile pic does not have enough blurple (over 75% in total and over 5% blurple). However, this colour detecting algorithm is automated, so if you believe your pfp is blurple enough, then we apologize for the faulty algorithm. (Not sure how to make a blurple logo? Type >blurplefy!)")
+            await bot.send_message(ctx.message.channel, "<@%s>, your profile pic does not have enough blurple (over 75% in total and over 5% blurple). However, this colour detecting algorithm is automated, so if you believe your pfp is blurple enough, then we apologize for the faulty algorithm. (Not sure how to make a blurple logo? Type >blurplefy!)" % ctx.message.author.id)
 
 @bot.command(pass_context=True)
 async def test(ctx):
