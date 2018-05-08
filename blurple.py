@@ -26,7 +26,6 @@ logger.addHandler(handler)
 
 from discord.ext import commands
 from discord.ext.commands import Bot
-from discord.ext.commands.cooldowns import BucketType
 
 bot = commands.Bot(command_prefix=">")
 
@@ -44,32 +43,6 @@ async def on_connect():
     print("Forked by Xeno#0001")
     print('------')
     await bot.change_presence(activity=">help for commands")
-
-@bot.event
-async def on_command_error(ctx, error):
-    #ignored = (commands.CommandNotFound, commands.UserInputError)
-    ignored = (commands.CommandNotFound)
-    if isinstance(error, ignored):
-        return
-
-    '''tracebackerror = traceback.print_exception(type(error), error, error.__traceback__)
-    await channel.send(tracebackerror)'''
-
-    if isinstance(error, commands.CommandOnCooldown):
-        if int(ctx.message.author.id) in allowedusers:
-            await ctx.reinvoke()
-            return
-        else:
-            msg = await bot.send_message(ctx.message.channel, "<@%s>, please slow down! This command is on cooldown. Please wait in a few seconds." % ctx.message.author.id)
-            #await asyncio.sleep(5)
-            #await msg.delete()
-            #await ctx.message.delete()
-            return
-
-    print(error)
-
-    if isinstance(error, commands.CheckFailure):
-        return
 
 @bot.command(pass_context=True, aliases=["reboot"])
 async def shutdown(ctx):
@@ -94,7 +67,6 @@ async def help(ctx):
     await bot.send_message(ctx.message.channel, embed=embed)
 
 @bot.command(pass_context=True)
-@commands.cooldown(rate=1, per=5, type=BucketType.user)
 async def ping(ctx):
     latency=bot.latency*1000
     latency=round(latency,2)
@@ -119,7 +91,6 @@ async def countdown(ctx):
     await bot.send_message(ctx.message.channel, embed=embed)
 
 @bot.command(aliases=['blurplfygif', 'blurplefiergif'])
-@commands.cooldown(rate=1, per=10, type=BucketType.user)
 async def blurplefygif(ctx, arg1 = None):
     picture = None
 
@@ -224,7 +195,6 @@ async def blurplefygif(ctx, arg1 = None):
         await bot.send_file(ctx.message.channel, fp=image, filename='image.gif')
 
 @bot.command(pass_context=True, aliases=['blurplfy', 'blurplefier'])
-@commands.cooldown(rate=1, per=10, type=BucketType.user)
 async def blurplefy(ctx, arg1 = None):
     """Blurplefy your image/gif!"""
     picture = None
@@ -364,7 +334,6 @@ async def blurplefy(ctx, arg1 = None):
             await bot.send_file(ctx.message.channel, fp=image, filename='image.gif')
 
 @bot.command(pass_context=True)
-@commands.cooldown(rate=1, per=10, type=BucketType.user)
 async def blurple(ctx, arg1 = None):
     picture = None
 
