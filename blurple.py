@@ -150,7 +150,7 @@ async def blurplefygif(ctx, arg1 = None):
     maxpixelcount = 1562500
 
     end = time.time()
-    await bot.send_message(ctx.message.channel, "<@%s>, image fetched, analysing image (This process can sometimes take a while depending on the size of the image)')
+    await bot.send_message(ctx.message.channel, "<@%s>, image fetched, analysing image (This process can sometimes take a while depending on the size of the image)")
     start = time.time()
     if impixels > maxpixelcount:
         downsizefraction = math.sqrt(maxpixelcount/impixels)
