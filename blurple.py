@@ -461,7 +461,6 @@ async def blurple(ctx, arg1 = None):
         image = await bot.loop.run_in_executor(None, imager, im)
         end = time.time()
         #await ctx.send(f"{ctx.author.display_name}, image data extracted ({end - start:.2f}s)")
-        image = await bot.send_file(ctx.message.channel, fp=image, filename='image.png')
 
         blurplenesspercentage = round(((nooftotalpixels/noofpixels)*100), 2)
         percentblurple = round(((noofblurplepixels/noofpixels)*100), 2)
@@ -469,10 +468,10 @@ async def blurple(ctx, arg1 = None):
         percentwhite = round(((noofwhitepixels/noofpixels)*100), 2)
 
         embed = discord.Embed(Title = "", colour = 0x7289DA)
-        embed.add_field(name="Total amount of Blurple", value="{blurplenesspercentage}%", inline=False)
-        embed.add_field(name="Blurple (rgb(114, 137, 218))", value="{percentblurple}%", inline=True)
-        embed.add_field(name="White (rgb(255, 255, 255))", value="{percentwhite}\%", inline=True)
-        embed.add_field(name="Dark Blurple (rgb(78, 93, 148))", value="{percentdblurple}\%", inline=True)
+        embed.add_field(name="Total amount of Blurple", value="%s" % blurplenesspercentage, inline=False)
+        embed.add_field(name="Blurple (rgb(114, 137, 218))", value="%s" % percentblurple, inline=True)
+        embed.add_field(name="White (rgb(255, 255, 255))", value="%s" % percentwhite, inline=True)
+        embed.add_field(name="Dark Blurple (rgb(78, 93, 148))", value="%s" % percentdblurple, inline=True)
         embed.add_field(name="Guide", value="Blurple, White, Dark Blurple = Blurple, White, and Dark Blurple (respectively) \nBlack = Not Blurple, White, or Dark Blurple", inline=False)
         embed.set_footer(text="Please note: Discord slightly reduces quality of the images, therefore the percentages may be slightly inaccurate. | Content requested by {ctx.author}")
         embed.set_thumbnail(url=picture)
