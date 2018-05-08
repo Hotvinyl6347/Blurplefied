@@ -158,7 +158,7 @@ async def blurplefygif(ctx, arg1 = None):
         imsize = list(im.size)
         impixels = imsize[0]*imsize[1]
         end = time.time()
-        await bot.send_message(ctx.message.channel, "<@%s>, image resized smaller for easier processing ({end-start:.2f}s)')
+        await bot.send_message(ctx.message.channel, "<@%s>, image resized smaller for easier processing")
         start = time.time()
 
     def imager(im):
@@ -401,7 +401,7 @@ async def blurple(ctx, arg1 = None):
         imsize = list(im.size)
         impixels = imsize[0]*imsize[1]
         end = time.time()
-        await bot.send_message(ctx.message.channel, "<@%s>, image resized smaller for easier processing ({end-start:.2f}s)')
+        await bot.send_message(ctx.message.channel, "<@%s>, image resized smaller for easier processing")
         start = time.time()
 
     def imager(im):
