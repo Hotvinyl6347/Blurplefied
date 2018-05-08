@@ -60,7 +60,7 @@ async def on_command_error(ctx, error):
             await ctx.reinvoke()
             return
         else:
-            msg = await bot.send_message("<@%s>, please slow down! This command is on cooldown. Please wait in a few seconds." % ctx.message.author.id)
+            msg = await bot.send_message(ctx.message.channel, "<@%s>, please slow down! This command is on cooldown. Please wait in a few seconds." % ctx.message.author.id)
             #await asyncio.sleep(5)
             #await msg.delete()
             #await ctx.message.delete()
