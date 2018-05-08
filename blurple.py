@@ -475,7 +475,8 @@ async def blurple(ctx, arg1 = None):
         embed.add_field(name="Dark Blurple (rgb(78, 93, 148))", value="{percentdblurple}\%", inline=True)
         embed.add_field(name="Guide", value="Blurple, White, Dark Blurple = Blurple, White, and Dark Blurple (respectively) \nBlack = Not Blurple, White, or Dark Blurple", inline=False)
         embed.set_footer(text="Please note: Discord slightly reduces quality of the images, therefore the percentages may be slightly inaccurate. | Content requested by {ctx.author}")
-        await bot.send_message(ctx.message.channel, embed=embed, file=image)
+        embed.set_thumbnail(url=picture)
+        await bot.send_message(ctx.message.channel, embed=embed)
 
         if blurplenesspercentage > 75 and picture == ctx.author.avatar_url and percentblurple > 5:
             await bot.send_message(ctx.message.channel, "<@%s>, your profile pic has enough blurple (over 75% in total and over 5% blurple)!" % ctx.message.author.id)
