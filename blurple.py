@@ -123,7 +123,7 @@ async def blurplefygif(ctx, arg1 = None):
                 picture = image.url
 
     if picture == None:
-        picture = ctx.author.avatar_url
+        picture = ctx.message.author.avatar_url
 
     try:
         async with aiohttp.ClientSession() as cs:
@@ -228,7 +228,7 @@ async def blurplefy(ctx, arg1 = None):
                 picture = image.url
 
     if picture == None:
-        picture = ctx.author.avatar_url
+        picture = ctx.message.author.avatar_url
 
     try:
         async with aiohttp.ClientSession() as cs:
@@ -368,7 +368,7 @@ async def blurple(ctx, arg1 = None):
                 picture = image.url
 
     if picture == None:
-        picture = ctx.author.avatar_url
+        picture = ctx.message.author.avatar_url
 
     try:
         async with aiohttp.ClientSession() as cs:
@@ -473,13 +473,12 @@ async def blurple(ctx, arg1 = None):
         embed.add_field(name="White (rgb(255, 255, 255))", value="%s%%" % percentwhite, inline=True)
         embed.add_field(name="Dark Blurple (rgb(78, 93, 148))", value="%s%%" % percentdblurple, inline=True)
         embed.add_field(name="Guide", value="Blurple, White, Dark Blurple = Blurple, White, and Dark Blurple (respectively) \nBlack = Not Blurple, White, or Dark Blurple", inline=False)
-        embed.set_footer(text="Please note: Discord slightly reduces quality of the images, therefore the percentages may be slightly inaccurate. | Content requested by {ctx.author}")
+        embed.set_footer(text="Please note: Discord slightly reduces quality of the images, therefore the percentages may be slightly inaccurate. | Content requested by %s#%s" % (ctx.message.author.name, ctx.message.author.discriminator))
         embed.set_thumbnail(url=picture)
         await bot.send_message(ctx.message.channel, embed=embed)
 
         if blurplenesspercentage > 75 and picture == ctx.message.author.avatar_url and percentblurple > 5:
             await bot.send_message(ctx.message.channel, "<@%s>, your profile pic has enough blurple (over 75%% in total and over 5% blurple)!" % ctx.message.author.id)
-            await ctx.author.add_roles(blurpleuserrole)
         elif picture == ctx.message.author.avatar_url and blurpleuserrole not in ctx.message.author.roles:
             await bot.send_message(ctx.message.channel, "<@%s>, your profile pic does not have enough blurple (over 75%% in total and over 5% blurple). However, this colour detecting algorithm is automated, so if you believe your pfp is blurple enough, then we apologize for the faulty algorithm. (Not sure how to make a blurple logo? Type >blurplefy!)" % ctx.message.author.id)
 
